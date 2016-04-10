@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     scene2=new QGraphicsScene(this);
     scene3=new QGraphicsScene(this);
     scene4=new QGraphicsScene(this);
-    kernel_size=5;
+    kernel_size=3;
 }
 
 MainWindow::~MainWindow(){
@@ -59,13 +59,7 @@ void MainWindow::on_FindDisparity_pressed(){
         view3.setScene(scene3);
         scene3->addPixmap(img_for_show);
         view3.show();
-        img_for_show=QPixmap::fromImage(disparity->GetDispMap2());
-        view4.setScene(scene4);
-        scene4->addPixmap(img_for_show);
-        view4.show();
         disparity->GetDispMap().save("E:\\Qt\\Projects\\left_output.png");
-        disparity->GetDispMap2().save("E:\\Qt\\Projects\\right_output.png");
-
     }
 
 }

@@ -10,7 +10,6 @@ private:
     QImage *left_img;
     QImage *right_img;
     QImage *disp_map;
-    QImage *disp_map2;
     QStack <int> left_window;
     QStack <int> right_window;
 public:
@@ -20,7 +19,6 @@ public:
     QImage& GetLeft();
     QImage& GetRight();
     QImage& GetDispMap();
-    QImage& GetDispMap2();
     static void ExtendImage(QImage &, QImage &, int);
     void FindDisparity(QImage &,QImage&, int, int, int);
     int FindMinSum(QImage&, QImage&,int,int,int,int);
