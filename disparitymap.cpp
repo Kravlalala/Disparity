@@ -90,10 +90,36 @@ void DisparityMap:: FindDisparity(QImage &first_img,QImage &second_img, int disp
                             }
                         }
                     }
+                    if(undef_flag==false){
+                        for (int d=-disp_max;d<=-disp_min;d++){
+                            if((y+d1+d)<0){
+                                temp_line[y-addition]=qRgb(0,0,255);
+                                undef_flag=true;
+                                break;
+                            }
+                            else{
+                                current_sum=SSD(*right_img,*left_img,kernel_size,x,y+d1,d);
+                                if(d==-disp_max){
+                                    min_sum=current_sum;
+                                    d2=d;
+                                }
+                                else{
+                                    if(current_sum<min_sum){
+                                        d2=d;
+                                        min_sum=current_sum;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                 }
                 if(undef_flag==false){
-                    disp_color.setHsv(0,0,(d1-disp_min)*norm_fact);
-                    temp_line[y-addition]=disp_color.rgb();
+                    if(abs(d1+d2)<=1){
+                        disp_color.setHsv(0,0,(d1-disp_min)*norm_fact);
+                        temp_line[y-addition]=disp_color.rgb();
+                    }
+                    else  temp_line[y-addition]=qRgb(0,255,0);
                 }
                 else undef_flag=false;
             }
