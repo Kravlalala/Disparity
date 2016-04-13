@@ -22,7 +22,7 @@ public:
     static void ExtendImage(QImage &, QImage &, int);
     void FindDisparity(QImage &,QImage&, int, int, int);
     int FindMinSum(QImage&, QImage&,int,int,int,int);
-    int SSD(QImage&, QImage &, int, int, int, int );
+    int SSD(QImage&, QImage &, double *, int, int, int, int, int, int );
 };
 
 #endif // DISPARITYMAP_H

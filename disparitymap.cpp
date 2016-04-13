@@ -61,6 +61,7 @@ void DisparityMap:: FindDisparity(QImage &first_img,QImage &second_img, int disp
     int norm_fact=255/(disp_max-disp_min);
     int rows=left_img->height();
     int cols=left_img->width();
+    double *SSD_Mat=new double[disp_max-disp_min+1];
     QImage temp_map(cols-addition*2,rows-addition*2,left_img->format());
         for(int x=addition;x<rows-addition;x++){
             left_line=reinterpret_cast<QRgb*>(left_img->scanLine(x));
@@ -77,7 +78,7 @@ void DisparityMap:: FindDisparity(QImage &first_img,QImage &second_img, int disp
                             break;
                         }
                         else{
-                            current_sum=SSD(*left_img,*right_img,kernel_size,x,y,d);
+                            current_sum=SSD(*left_img,*right_img, SSD_Mat, kernel_size, x, y, d, d1, disp_min);
                             if(d==disp_min){
                                 min_sum=current_sum;
                                 d1=d;
@@ -98,7 +99,7 @@ void DisparityMap:: FindDisparity(QImage &first_img,QImage &second_img, int disp
                                 break;
                             }
                             else{
-                                current_sum=SSD(*right_img,*left_img,kernel_size,x,y+d1,d);
+                                current_sum=SSD(*right_img,*left_img, SSD_Mat, kernel_size, x, y+d1,d, d1, disp_min);
                                 if(d==-disp_max){
                                     min_sum=current_sum;
                                     d2=d;
@@ -126,7 +127,7 @@ void DisparityMap:: FindDisparity(QImage &first_img,QImage &second_img, int disp
         }
         *disp_map=temp_map;
 }
-int DisparityMap:: SSD(QImage &left_img, QImage &right_img, int kernel_size, int x, int y, int d){
+int DisparityMap:: SSD(QImage &left_img, QImage &right_img, double *SSD_Mat, int kernel_size, int x, int y, int d,  int d1, int disp_min){
     QRgb *left_line;
     QRgb *right_line;
     QColor left_color;
@@ -135,16 +136,27 @@ int DisparityMap:: SSD(QImage &left_img, QImage &right_img, int kernel_size, int
     int Ir;
     int sum=0;
     int addition=kernel_size/2;
-    for(int X0=x-addition;X0<=x+addition;X0++){
-         left_line=reinterpret_cast<QRgb*>(left_img.scanLine(X0));
-         right_line=reinterpret_cast<QRgb*>(right_img.scanLine(X0));
-         for(int Y0=y-addition;Y0<=y+addition;Y0++){
-            left_color.setRgb(left_line[Y0]);
-            right_color.setRgb(right_line[Y0+d]);
-            Il=left_color.value();
-            Ir=right_color.value();
-            sum+=(Ir-Il)*(Ir-Il);
-         }
+    int squared_dif=0;
+    if(d<0 && abs(d)<=d1){
+        sum=SSD_Mat[abs(d)-disp_min];
+    }
+    else{
+        for(int X0=x-addition;X0<=x+addition;X0++){
+             for(int Y0=y-addition;Y0<=y+addition;Y0++){
+                    left_line=reinterpret_cast<QRgb*>(left_img.scanLine(X0));
+                    right_line=reinterpret_cast<QRgb*>(right_img.scanLine(X0));
+                    left_color.setRgb(left_line[Y0]);
+                    right_color.setRgb(right_line[Y0+d]);
+                    Il=left_color.value();
+                    Ir=right_color.value();
+                    squared_dif=(Ir-Il)*(Ir-Il);
+                    sum+=squared_dif;
+             }
+        }
+        if(d>0){
+            SSD_Mat[d-disp_min]=sum;
+        }
     }
     return sum;
 }
+

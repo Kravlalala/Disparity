@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     scene2=new QGraphicsScene(this);
     scene3=new QGraphicsScene(this);
     scene4=new QGraphicsScene(this);
-    kernel_size=3;
+    kernel_size=7;
 }
 
 MainWindow::~MainWindow(){
@@ -53,10 +53,6 @@ void MainWindow::on_IMG2Load_pressed()
 }
 
 void MainWindow::on_FindDisparity_pressed(){
-    first_img->load("E://Qt//Projects//Disparity//1.png");
-    GrayScale::ConvToGrey(*first_img,*first_gray, undef_points);
-    second_img->load("E://Qt//Projects//Disparity//2.png");
-    GrayScale::ConvToGrey(*second_img,*second_gray, undef_points);
     if(second_img->format()!=0 &&first_img->format()!=0){
         disparity->FindDisparity(*first_gray,*second_gray,283,311,kernel_size);
         img_for_show=QPixmap::fromImage(disparity->GetDispMap());
