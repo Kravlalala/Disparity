@@ -11,6 +11,7 @@
 #include <QString>
 #include <grayscale.h>
 #include <disparitymap.h>
+#include <QTime>
 
 namespace Ui {
 class MainWindow;
