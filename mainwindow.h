@@ -35,6 +35,8 @@ class MainWindow : public QMainWindow
     QGraphicsScene *scene3;
     QGraphicsView view3;
     int kernel_size;
+    int disp_min;
+    int disp_max;
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
@@ -43,6 +45,8 @@ private slots:
     void on_IMGLoad_pressed();
     void on_IMG2Load_pressed();
     void on_FindDisparity_pressed();
+    void on_DispMin_spinBox_valueChanged(int arg1);
+    void on_DispMax_spinBox_valueChanged(int arg1);
 };
 
 #endif // MAINWINDOW_H

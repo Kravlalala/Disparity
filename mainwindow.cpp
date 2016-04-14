@@ -32,7 +32,10 @@ void MainWindow::on_IMGLoad_pressed()
 {
     QString image_path=QFileDialog::getOpenFileName(this,tr("Open file"),"",tr("PNG (*.png);;JPEG(*.jpg *.jpeg);;"));
     first_img->load(image_path);
-    GrayScale::ConvToGrey(*first_img,*first_gray);
+    if(first_img->allGray()==false){
+        GrayScale::ConvToGrey(*first_img,*first_gray);
+    }
+    else first_gray=first_img;
     img_for_show=QPixmap::fromImage(*first_img);
     view1.setScene(scene1);
     scene1->addPixmap(img_for_show);
@@ -43,7 +46,10 @@ void MainWindow::on_IMG2Load_pressed()
 {
     QString image_path=QFileDialog::getOpenFileName(this,tr("Open file"),"",tr("PNG (*.png);;JPEG(*.jpg *.jpeg);;"));
     second_img->load(image_path);
-    GrayScale::ConvToGrey(*second_img,*second_gray);
+    if(second_img->allGray()==false){
+        GrayScale::ConvToGrey(*second_img,*second_gray);
+    }
+    else second_gray=second_img;
     img_for_show=QPixmap::fromImage(*second_img);
     view2.setScene(scene2);
     scene2->addPixmap(img_for_show);
@@ -54,7 +60,7 @@ void MainWindow::on_FindDisparity_pressed(){
     if(second_img->format()!=0 &&first_img->format()!=0){
         QTime start;
         start.start();
-        disparity->FindDisparity(*first_gray,*second_gray,283,311,kernel_size);
+        disparity->FindDisparity(*first_gray,*second_gray,disp_min,disp_max,kernel_size);
         qDebug("Time elapsed: %d ms", start.elapsed());
         img_for_show=QPixmap::fromImage(disparity->GetDispMap());
         view3.setScene(scene3);
@@ -63,3 +69,15 @@ void MainWindow::on_FindDisparity_pressed(){
         disparity->GetDispMap().save("E:\\Qt\\Projects\\disparity map.png");
     }
 }
+
+void MainWindow::on_DispMin_spinBox_valueChanged(int arg1)
+{
+    disp_min=arg1;
+}
+
+void MainWindow::on_DispMax_spinBox_valueChanged(int arg1)
+{
+    disp_max=arg1;
+}
+
+
