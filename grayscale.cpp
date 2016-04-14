@@ -8,7 +8,7 @@ GrayScale::~GrayScale(){
 
 }
 
-QImage GrayScale:: ConvToGrey(QImage &input_img, QImage &gray_img,QStack <int> undef_points){
+QImage GrayScale:: ConvToGrey(QImage &input_img, QImage &gray_img){
     gray_img=input_img;
     QRgb *temp_line=NULL;
     QColor current_color;
@@ -24,8 +24,6 @@ QImage GrayScale:: ConvToGrey(QImage &input_img, QImage &gray_img,QStack <int> u
         for(int y=0;y<=width-1;y++){
             current_color.setRgb(*temp_line);
             if(current_color.value()==0){
-                undef_points.push(x);
-                undef_points.push(y);
                 *temp_line++=qRgb(0,0,255);
             }
             else{

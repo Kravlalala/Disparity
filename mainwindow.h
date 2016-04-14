@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QStack>
 #include <QImage>
 #include <QPixmap>
 #include <QGraphicsScene>
@@ -35,9 +34,6 @@ class MainWindow : public QMainWindow
     QGraphicsView view2;
     QGraphicsScene *scene3;
     QGraphicsView view3;
-    QGraphicsScene *scene4;
-    QGraphicsView view4;
-    QStack <int> undef_points;
     int kernel_size;
 public:
     explicit MainWindow(QWidget *parent = 0);

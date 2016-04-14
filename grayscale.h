@@ -2,7 +2,6 @@
 #define GRAYSCALE_H
 #include <QImage>
 #include <QColor>
-#include <QStack>
 
 
 class GrayScale
@@ -11,7 +10,7 @@ class GrayScale
 public:
     GrayScale();
     ~GrayScale();
-    static QImage ConvToGrey(QImage &, QImage&, QStack <int>);
+    static QImage ConvToGrey(QImage &, QImage&);
 };
 
 #endif // GRAYSCALE_H

@@ -13,7 +13,6 @@ MainWindow::MainWindow(QWidget *parent) :
     scene1=new QGraphicsScene(this);
     scene2=new QGraphicsScene(this);
     scene3=new QGraphicsScene(this);
-    scene4=new QGraphicsScene(this);
     kernel_size=7;
 }
 
@@ -27,14 +26,13 @@ MainWindow::~MainWindow(){
     delete scene1;
     delete scene2;
     delete scene3;
-    delete scene4;
 }
 
 void MainWindow::on_IMGLoad_pressed()
 {
     QString image_path=QFileDialog::getOpenFileName(this,tr("Open file"),"",tr("PNG (*.png);;JPEG(*.jpg *.jpeg);;"));
     first_img->load(image_path);
-    GrayScale::ConvToGrey(*first_img,*first_gray, undef_points);
+    GrayScale::ConvToGrey(*first_img,*first_gray);
     img_for_show=QPixmap::fromImage(*first_img);
     view1.setScene(scene1);
     scene1->addPixmap(img_for_show);
@@ -45,7 +43,7 @@ void MainWindow::on_IMG2Load_pressed()
 {
     QString image_path=QFileDialog::getOpenFileName(this,tr("Open file"),"",tr("PNG (*.png);;JPEG(*.jpg *.jpeg);;"));
     second_img->load(image_path);
-    GrayScale::ConvToGrey(*second_img,*second_gray, undef_points);
+    GrayScale::ConvToGrey(*second_img,*second_gray);
     img_for_show=QPixmap::fromImage(*second_img);
     view2.setScene(scene2);
     scene2->addPixmap(img_for_show);
@@ -64,5 +62,4 @@ void MainWindow::on_FindDisparity_pressed(){
         view3.show();
         disparity->GetDispMap().save("E:\\Qt\\Projects\\disparity map.png");
     }
-
 }
