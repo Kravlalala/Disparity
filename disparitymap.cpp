@@ -92,7 +92,7 @@ void DisparityMap:: FindDisparity(QImage &first_img,QImage &second_img, int disp
                         }
                     }
                     if(undef_flag==false){
-                        for (int d=-disp_max;d<=-disp_min;d++){
+                        for (int d=-(d1+3);d<=-disp_min;d++){
                             if((y+d1+d)<0){
                                 temp_line[y-addition]=qRgb(0,0,255);
                                 undef_flag=true;
@@ -100,7 +100,7 @@ void DisparityMap:: FindDisparity(QImage &first_img,QImage &second_img, int disp
                             }
                             else{
                                 current_sum=SSD(*right_img,*left_img, SSD_Mat, kernel_size, x, y+d1,d, d1, disp_min);
-                                if(d==-disp_max){
+                                if(d==-(d1+3)){
                                     min_sum=current_sum;
                                     d2=d;
                                 }
