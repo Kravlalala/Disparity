@@ -66,7 +66,7 @@ void MainWindow::on_FindDisparity_pressed(){
         view3.setScene(scene3);
         scene3->addPixmap(img_for_show);
         view3.show();
-        disparity->GetDispMap().save("E:\\Qt\\Projects\\disparity map.png");
+        disparity->GetDispMap().save("E:\\Qt\\Projects\\disparity\\disparity map.png");
     }
 }
 
