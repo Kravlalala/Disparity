@@ -125,7 +125,7 @@ void DisparityMap:: FindDisparity(QImage &first_img,QImage &second_img, int disp
             }
             if(undef_flag==false){
                 if(abs(d1+d2)<=2){
-                    disp_color.setHsv(0,0,(disp_max-d1)*norm_fact);
+                    disp_color.setHsv(0,0,(d1-disp_min)*norm_fact);
                     temp_line[y-addition]=disp_color.rgb();
                 }
                 else  temp_line[y-addition]=qRgb(0,0,255);
