@@ -53,6 +53,7 @@ void DisparityMap:: FindDisparity(QImage &first_img,QImage &second_img, int disp
     QRgb *right_line;
     QRgb *temp_line;
     QColor disp_color;
+    QTime chronograph;
     bool undef_flag=false;
     int addition=kernel_size/2;
     int min_sum=1;
@@ -64,6 +65,7 @@ void DisparityMap:: FindDisparity(QImage &first_img,QImage &second_img, int disp
     int cols=left_img->width();
     double *SSD_Mat=new double[disp_max-disp_min+1];
     QImage temp_map(cols-addition*2,rows-addition*2,left_img->format());
+    chronograph.start();
     for(int x=addition;x<rows-addition;x++){
         left_line=reinterpret_cast<QRgb*>(left_img->scanLine(x));
         temp_line=reinterpret_cast<QRgb*>(temp_map.scanLine(x-addition));
@@ -132,6 +134,7 @@ void DisparityMap:: FindDisparity(QImage &first_img,QImage &second_img, int disp
             }
         }
     }
+    qDebug("Time elapsed: %d ms\n", chronograph.elapsed());
     *disp_map=temp_map;
 }
 int DisparityMap:: SSD(QImage &left_img, QImage &right_img, double *SSD_Mat, int kernel_size, int x, int y, int d,  int d1, int disp_min){

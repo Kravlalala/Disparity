@@ -47,6 +47,7 @@ private slots:
     void on_FindDisparity_pressed();
     void on_DispMin_spinBox_valueChanged(int arg1);
     void on_DispMax_spinBox_valueChanged(int arg1);
+    void on_comboBox_currentTextChanged(const QString);
 };
 
 #endif // MAINWINDOW_H

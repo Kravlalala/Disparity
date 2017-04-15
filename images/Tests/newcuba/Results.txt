@@ -1,0 +1,11 @@
+Template parameters: name - "Newcuba", geometry - 701 x 487
+
+Kernel size		Elapsed time, ms
+
+3				28.825 
+5				78.367
+7				155.836
+9				246.477
+11				366.332
+13
+15

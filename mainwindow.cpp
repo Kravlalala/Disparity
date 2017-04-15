@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     scene1=new QGraphicsScene(this);
     scene2=new QGraphicsScene(this);
     scene3=new QGraphicsScene(this);
-    kernel_size=7;
+    kernel_size=3;
 }
 
 MainWindow::~MainWindow(){
@@ -81,3 +81,8 @@ void MainWindow::on_DispMax_spinBox_valueChanged(int arg1)
 }
 
 
+
+void MainWindow::on_comboBox_currentTextChanged(const QString new_kernel_size)
+{
+    kernel_size = new_kernel_size.toInt();
+}

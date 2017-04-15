@@ -2,6 +2,7 @@
 #define DISPARITYMAP_H
 #include <QImage>
 #include <QColor>
+#include <QTime>
 class DisparityMap
 {
 private:
