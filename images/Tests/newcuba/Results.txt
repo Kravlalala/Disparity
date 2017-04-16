@@ -1,11 +1,12 @@
-Template parameters: name - "Newcuba", geometry - 701 x 487
+Template parameters: name - "Newcuba", geometry - 701 x 487, max_disparity - 143
 
 Kernel size		Elapsed time, ms
 
-3				28.825 
-5				78.367
-7				155.836
-9				246.477
-11				366.332
-13
-15
+3				31.241
+5				94.534
+7				176.033
+9				290.695
+11				421.841 
+13				594.447 
+15				789.758
+17				1011.004

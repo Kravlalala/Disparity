@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+using namespace cv;
+using namespace std;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow){
@@ -57,16 +59,13 @@ void MainWindow::on_IMG2Load_pressed()
 }
 
 void MainWindow::on_FindDisparity_pressed(){
-    if(second_img->format()!=0 &&first_img->format()!=0){
-        QTime start;
-        start.start();
+    if(second_img->format()!=0 && first_img->format()!=0){
         disparity->FindDisparity(*first_gray,*second_gray,disp_min,disp_max,kernel_size);
-        qDebug("Time elapsed: %d ms", start.elapsed());
         img_for_show=QPixmap::fromImage(disparity->GetDispMap());
         view3.setScene(scene3);
         scene3->addPixmap(img_for_show);
         view3.show();
-        disparity->GetDispMap().save("E:\\Qt\\Projects\\disparity\\disparity map.png");
+        disparity->GetDispMap().save("disparity_map.png");
     }
 }
 
@@ -85,4 +84,16 @@ void MainWindow::on_DispMax_spinBox_valueChanged(int arg1)
 void MainWindow::on_comboBox_currentTextChanged(const QString new_kernel_size)
 {
     kernel_size = new_kernel_size.toInt();
+}
+
+
+void MainWindow::on_MedianFilter_clicked()
+{
+    Mat image;
+    Mat filtered;
+    image = imread("disparity_map.png",IMREAD_COLOR);
+    medianBlur(image,filtered,7);
+    imwrite("filtered_map.png",filtered);
+    namedWindow("Median blur", WINDOW_AUTOSIZE);
+    imshow("Median blur", filtered);
 }

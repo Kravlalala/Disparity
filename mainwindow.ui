@@ -53,10 +53,10 @@
    <widget class="QPushButton" name="FindDisparity">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>180</y>
-      <width>111</width>
-      <height>51</height>
+      <x>170</x>
+      <y>190</y>
+      <width>101</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
@@ -207,6 +207,24 @@
     </property>
     <property name="text">
      <string>Kernel size</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="MedianFilter">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>190</y>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Median blur</string>
     </property>
    </widget>
   </widget>

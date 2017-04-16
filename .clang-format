@@ -1,0 +1,46 @@
+Language: Cpp
+
+# The column limit
+ColumnLimit: '80'
+
+# The number of columns to use for indentation
+IndentWidth: '2'
+
+# braces wrapping style
+BreakBeforeBraces: Linux
+
+#indent case statements 
+IndentCaseLabels: 'true'
+
+#align carrying params in brackets
+AlignAfterOpenBracket: Align
+
+#align carrying operands
+AlignOperands: 'true'
+
+#align trailing comments
+AlignTrailingComments: 'true'
+
+#single line blocks is prohibited
+AllowShortBlocksOnASingleLine: 'false'
+
+#single line function defenition is prohibited
+AllowShortFunctionsOnASingleLine: None
+
+#single line if statements is prohibited
+AllowShortIfStatementsOnASingleLine: 'false'
+
+#single line while/repeat is prohibited
+AllowShortLoopsOnASingleLine: 'false'
+
+#pointer is aligned to right side
+PointerAlignment: Right
+
+#wrap assignment operators with spaces
+SpaceBeforeAssignmentOperators: 'true'
+
+#always add spaces before opening parantheses
+SpaceBeforeParens: Always
+
+
+

@@ -1,0 +1,11 @@
+Template parameters: name - "Ambash", geometry - 1024 x 436, max_disparity - 143
+
+Kernel size		Elapsed time, ms
+
+3				43.307 
+5				120.295 				
+7				228.285 
+9				387.798
+11				572.309
+13				799.391
+15				1069.175
